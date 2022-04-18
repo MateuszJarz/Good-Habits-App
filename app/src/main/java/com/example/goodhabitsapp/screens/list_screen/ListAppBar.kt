@@ -32,7 +32,7 @@ fun ListAppBar(
    // navController: NavController,
    // sharedViewModel: SharedViewModel,
     //searchAppBarState: SearchAppBarState,
-    searchTextState: String
+   // searchTextState: String
 ) {
 
    /* TODO when (searchAppBarState) {
