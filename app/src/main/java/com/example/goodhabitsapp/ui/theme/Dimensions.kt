@@ -8,3 +8,6 @@ val MEDIUM_PADDING = 8.dp
 val SMALL_PADDING = 6.dp
 
 val SIZE_LOGO = 100.dp
+
+
+val TOP_APP_BAR_HEIGHT = 56.dp
