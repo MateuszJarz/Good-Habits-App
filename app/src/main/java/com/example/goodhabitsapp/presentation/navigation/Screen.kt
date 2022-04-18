@@ -1,4 +1,4 @@
-package com.example.goodhabitsapp.navigation
+package com.example.goodhabitsapp.presentation.navigation
 
 import com.example.goodhabitsapp.util.Action
 

@@ -1,4 +1,4 @@
-package com.example.goodhabitsapp.screens.components.app_bars
+package com.example.goodhabitsapp.presentation.screens.components.app_bars
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,18 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import com.example.goodhabitsapp.R
 import com.example.goodhabitsapp.domain.model.Priority
 import com.example.goodhabitsapp.ui.theme.LARGE_PADDING
 import com.example.goodhabitsapp.ui.theme.TOP_APP_BAR_HEIGHT
 import com.example.goodhabitsapp.ui.theme.topAppBarBackgroundColor
 import com.example.goodhabitsapp.ui.theme.topAppBarContentColor
-import androidx.compose.runtime.R as R1
 
 @Composable
 fun ListAppBar(

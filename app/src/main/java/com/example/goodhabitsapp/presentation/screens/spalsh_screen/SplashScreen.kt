@@ -1,4 +1,4 @@
-package com.example.goodhabitsapp.screens
+package com.example.goodhabitsapp.presentation.screens
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.goodhabitsapp.R
-import com.example.goodhabitsapp.navigation.Screen
+import com.example.goodhabitsapp.presentation.navigation.Screen
 import com.example.goodhabitsapp.ui.theme.SIZE_LOGO
 import com.example.goodhabitsapp.ui.theme.splashScreenBackground
 import com.example.goodhabitsapp.util.Constants.SPLASH_SCREEN_DELAY

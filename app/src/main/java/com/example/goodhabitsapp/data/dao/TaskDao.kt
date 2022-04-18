@@ -1,4 +1,4 @@
-package com.example.goodhabitsapp.data
+package com.example.goodhabitsapp.data.dao
 
 import androidx.room.*
 import com.example.goodhabitsapp.domain.model.Task

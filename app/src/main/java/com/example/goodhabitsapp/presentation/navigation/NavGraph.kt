@@ -1,13 +1,12 @@
-package com.example.goodhabitsapp.navigation
+package com.example.goodhabitsapp.presentation.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.goodhabitsapp.screens.SplashScreen
+import com.example.goodhabitsapp.presentation.screens.SplashScreen
 
 
 @ExperimentalMaterialApi

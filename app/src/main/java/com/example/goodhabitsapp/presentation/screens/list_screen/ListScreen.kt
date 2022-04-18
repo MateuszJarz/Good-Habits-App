@@ -1,4 +1,4 @@
-package com.example.goodhabitsapp.screens.list_screen
+package com.example.goodhabitsapp.presentation.screens.list_screen
 
 import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -9,11 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.example.goodhabitsapp.navigation.Screen
-import com.example.goodhabitsapp.screens.components.app_bars.BottomMenuBar
-import com.example.goodhabitsapp.screens.components.app_bars.ListAppBar
+import com.example.goodhabitsapp.presentation.navigation.Screen
+import com.example.goodhabitsapp.presentation.screens.components.app_bars.BottomMenuBar
+import com.example.goodhabitsapp.presentation.screens.components.app_bars.ListAppBar
 import com.example.goodhabitsapp.ui.theme.fabBackgroundColor
 import com.example.goodhabitsapp.util.Action
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.example.goodhabitsapp.screens.components.app_bars
+package com.example.goodhabitsapp.presentation.screens.components.app_bars
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.BottomAppBar
@@ -10,7 +10,6 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.goodhabitsapp.R
 import com.example.goodhabitsapp.ui.theme.topAppBarBackgroundColor
