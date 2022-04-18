@@ -4,6 +4,7 @@ import androidx.room.*
 import com.example.goodhabitsapp.domain.model.Task
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

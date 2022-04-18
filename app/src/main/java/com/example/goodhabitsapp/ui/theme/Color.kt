@@ -1,5 +1,7 @@
 package com.example.goodhabitsapp.ui.theme
 
+import androidx.compose.material.Colors
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 val Purple200 = Color(0xFFBB86FC)
@@ -15,3 +17,30 @@ val LowPriorityColor = Color(0xFF00C980)
 val MediumPriorityColor = Color(0xFFFFC114)
 val HighPriorityColor = Color(0xFFFF4646)
 val NonePriorityColor = MediumGray
+
+val Colors.splashScreenBackground: Color
+    @Composable
+    get() = if (isLight) Purple700 else Color.Black
+
+val Colors.topAppBarContentColor: Color
+    @Composable
+    get() = if (isLight) Color.White else LightGray
+
+val Colors.topAppBarBackgroundColor: Color
+    @Composable
+    get() = if (isLight) Purple500 else Color.Black
+
+val Colors.fabBackgroundColor: Color
+    @Composable
+    get() = if (isLight) Teal200 else Purple700
+
+val Colors.taskItemBackgroundColor: Color
+    @Composable
+    get() = if (isLight) Color.White else DarkGray
+
+val Colors.taskItemTextColor: Color
+    @Composable
+    get() = if (isLight) DarkGray else LightGray
+
+
+

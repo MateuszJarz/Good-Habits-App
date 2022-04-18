@@ -7,6 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.goodhabitsapp.screens.SplashScreen
 
 
 @ExperimentalMaterialApi
@@ -23,7 +24,7 @@ fun SetupNavigation(
 
         //SPLASH
         composable(route = Screen.Splash.route) {
-
+            SplashScreen(navController = navController)
         }
 
         //TIMER
