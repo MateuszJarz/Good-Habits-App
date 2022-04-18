@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/mateu/GoodHabitsApp/app/src/main/res/drawable/ic_bar_chart.xml" value="0.1" />
+        <entry key="..\:/Users/mateu/GoodHabitsApp/app/src/main/res/drawable/ic_filter_list.xml" value="0.1" />
+        <entry key="..\:/Users/mateu/GoodHabitsApp/app/src/main/res/drawable/ic_schedule.xml" value="0.1" />
+        <entry key="..\:/Users/mateu/GoodHabitsApp/app/src/main/res/drawable/ic_vertical_menu.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
