@@ -10,6 +10,8 @@ import com.example.goodhabitsapp.domain.model.Task
 import com.example.goodhabitsapp.util.Action
 import com.example.goodhabitsapp.util.Constants.MAX_TITLE_LENGTH
 import com.example.goodhabitsapp.util.RequestState
+import com.example.goodhabitsapp.util.SearchAppBarState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,6 +20,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class TaskViewModel @Inject constructor(
         private val repository: TaskRepository,
     /* private val dataStoreRepository: DataStoreRepository */
@@ -30,8 +33,8 @@ class TaskViewModel @Inject constructor(
     val priority: MutableState<Priority> = mutableStateOf(Priority.LOW)
 
 
-  //  val searchAppBarState: MutableState<SearchAppBarState> =
-    //    mutableStateOf(SearchAppBarState.CLOSED)
+    val searchAppBarState: MutableState<SearchAppBarState> =
+       mutableStateOf(SearchAppBarState.CLOSED)
 
     val searchTextState: MutableState<String> =
         mutableStateOf("")
@@ -52,7 +55,7 @@ class TaskViewModel @Inject constructor(
         } catch (e: Exception) {
             _searchTask.value = RequestState.Error(error = e)
         }
-     //  searchAppBarState.value = SearchAppBarState.TRIGGERED
+       searchAppBarState.value = SearchAppBarState.TRIGGERED
 
     }
 
@@ -76,7 +79,7 @@ class TaskViewModel @Inject constructor(
         _sortState.value = RequestState.Loading
         try {
             viewModelScope.launch {
-              /*  dataStoreRepository.readSortState
+              /* dataStoreRepository.readSortState
                     .map { Priority.valueOf(it) }
                     .collect {
                         _sortState.value = RequestState.Success(it)
@@ -132,7 +135,7 @@ class TaskViewModel @Inject constructor(
             )
             repository.addTask(toDoTask = toDoTask)
         }
-        //searchAppBarState.value = SearchAppBarState.CLOSED
+        searchAppBarState.value = SearchAppBarState.CLOSED
     }
 
     private fun updateTask() {

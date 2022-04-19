@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.example.goodhabitsapp.R
 import com.example.goodhabitsapp.domain.model.Priority
 import com.example.goodhabitsapp.presentation.screens.components.PriorityItem
@@ -24,28 +25,31 @@ import com.example.goodhabitsapp.ui.theme.LARGE_PADDING
 import com.example.goodhabitsapp.ui.theme.TOP_APP_BAR_HEIGHT
 import com.example.goodhabitsapp.ui.theme.topAppBarBackgroundColor
 import com.example.goodhabitsapp.ui.theme.topAppBarContentColor
+import com.example.goodhabitsapp.util.Action
+import com.example.goodhabitsapp.util.SearchAppBarState
 import com.example.goodhabitsapp.util.TrailingIconState
+import com.example.goodhabitsapp.view_models.TaskViewModel
 
 @Composable
 fun ListAppBar(
-   // navController: NavController,
-   // taskViewModel : TaskViewModel
-    //searchAppBarState: SearchAppBarState,
-   // searchTextState: String
+    navController: NavController,
+    taskViewModel : TaskViewModel,
+    searchAppBarState: SearchAppBarState,
+    searchTextState: String
 ) {
 
-   /* TODO when (searchAppBarState) {
+    when (searchAppBarState) {
         SearchAppBarState.CLOSED -> {
             DefaultListAppBar(
                 onSearchClicked = {
-                    sharedViewModel.searchAppBarState.value =
+                    taskViewModel.searchAppBarState.value =
                         SearchAppBarState.OPENED
                 },
                 onSortClicked = {
-                    sharedViewModel.persistSortState(it)
+                    taskViewModel.persistSortState(it)
                 },
                 onDeleteAllConfirmed = {
-                    sharedViewModel.action.value = Action.DELETE_ALL
+                    taskViewModel.action.value = Action.DELETE_ALL
                 }
             )
         }
@@ -53,19 +57,19 @@ fun ListAppBar(
             SearchAppBar(
                 text = searchTextState,
                 onTextChange = { newText ->
-                    sharedViewModel.searchTextState.value = newText
+                    taskViewModel.searchTextState.value = newText
                 },
                 onCloseClicked = {
-                    sharedViewModel.searchAppBarState.value =
+                    taskViewModel.searchAppBarState.value =
                         SearchAppBarState.CLOSED
-                    sharedViewModel.searchTextState.value = ""
+                    taskViewModel.searchTextState.value = ""
                 },
                 onSearchClicked = {
-                    sharedViewModel.searchDatabase(it)
+                    taskViewModel.searchDatabase(it)
                 }
             )
         }
-    }*/
+    }
 
 }
 @Composable

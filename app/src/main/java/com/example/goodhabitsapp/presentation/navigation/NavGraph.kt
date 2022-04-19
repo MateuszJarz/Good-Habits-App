@@ -7,6 +7,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.goodhabitsapp.presentation.screens.SplashScreen
+import com.example.goodhabitsapp.presentation.screens.list_screen.ListScreen
+import com.example.goodhabitsapp.view_models.TaskViewModel
 
 
 @ExperimentalMaterialApi
@@ -14,6 +16,7 @@ import com.example.goodhabitsapp.presentation.screens.SplashScreen
 @Composable
 fun SetupNavigation(
     navController: NavHostController,
+    taskViewModel: TaskViewModel
 ) {
 
     NavHost(
@@ -39,15 +42,16 @@ fun SetupNavigation(
 
         //LIST
         composable(route = Screen.List.route) {
-
+            ListScreen(
+                navController = navController,
+                taskViewModel = taskViewModel
+            )
         }
 
         //TASK
         composable(route = Screen.Task.route) {
 
         }
-
-
 
 
     }

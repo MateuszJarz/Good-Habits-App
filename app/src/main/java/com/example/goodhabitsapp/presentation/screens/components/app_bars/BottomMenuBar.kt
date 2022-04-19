@@ -39,7 +39,7 @@ fun BottomMenuBarComponent(
     ) {
         IconButton(
             modifier = Modifier.weight(1f),
-            onClick = {}
+            onClick = {onClickedList()}
         ) {
             Icon(
                 imageVector = Icons.Filled.CheckCircle,
@@ -57,7 +57,7 @@ fun BottomMenuBarComponent(
         }
         IconButton(
             modifier = Modifier.weight(1f),
-            onClick = {}
+            onClick = {onClickedStatistic()}
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_bar_chart),

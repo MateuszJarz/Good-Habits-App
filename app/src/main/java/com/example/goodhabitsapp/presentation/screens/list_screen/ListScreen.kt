@@ -13,6 +13,7 @@ import com.example.goodhabitsapp.presentation.screens.components.app_bars.Bottom
 import com.example.goodhabitsapp.presentation.screens.components.app_bars.ListAppBar
 import com.example.goodhabitsapp.ui.theme.fabBackgroundColor
 import com.example.goodhabitsapp.util.Action
+import com.example.goodhabitsapp.util.SearchAppBarState
 import com.example.goodhabitsapp.view_models.TaskViewModel
 import kotlinx.coroutines.launch
 
@@ -40,9 +41,9 @@ fun ListScreen(
     val lowPriorityTasks by taskViewModel.lowPriorityTask.collectAsState()
     val highPriorityTasks by taskViewModel.highPriorityTask.collectAsState()
 
-  /*  val searchAppBarState: SearchAppBarState
+    val searchAppBarState: SearchAppBarState
             by taskViewModel.searchAppBarState
-    val searchTextState: String by taskViewModel.searchTextState*/
+    val searchTextState: String by taskViewModel.searchTextState
 
     val scaffoldState = rememberScaffoldState()
 
@@ -60,10 +61,10 @@ fun ListScreen(
         scaffoldState = scaffoldState,
         topBar = {
             ListAppBar(
-                /* TODO  sharedViewModel = sharedViewModel,
-                  searchAppBarState = searchAppBarState,
-                  searchTextState = searchTextState,
-                  navController = navController */
+                 navController = navController,
+                taskViewModel = taskViewModel,
+                searchAppBarState = searchAppBarState,
+                searchTextState = searchTextState
             )
         },
         bottomBar = {
