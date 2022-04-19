@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.goodhabitsapp.presentation.screens.SplashScreen
 import com.example.goodhabitsapp.presentation.screens.list_screen.ListScreen
+import com.example.goodhabitsapp.presentation.screens.timer_screen.TimerScreen
 import com.example.goodhabitsapp.view_models.TaskViewModel
 
 
@@ -31,7 +32,7 @@ fun SetupNavigation(
 
         //TIMER
         composable(route = Screen.Timer.route) {
-
+            TimerScreen(navController = navController)
         }
 
         //STATISTIC
