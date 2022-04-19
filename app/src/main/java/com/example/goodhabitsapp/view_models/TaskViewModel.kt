@@ -8,11 +8,13 @@ import com.example.goodhabitsapp.data.repository.TaskRepository
 import com.example.goodhabitsapp.domain.model.Priority
 import com.example.goodhabitsapp.domain.model.Task
 import com.example.goodhabitsapp.util.Action
+import com.example.goodhabitsapp.util.Constants.MAX_TITLE_LENGTH
 import com.example.goodhabitsapp.util.RequestState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,8 +30,8 @@ class TaskViewModel @Inject constructor(
     val priority: MutableState<Priority> = mutableStateOf(Priority.LOW)
 
 
-    val searchAppBarState: MutableState<SearchAppBarState> =
-        mutableStateOf(SearchAppBarState.CLOSED)
+  //  val searchAppBarState: MutableState<SearchAppBarState> =
+    //    mutableStateOf(SearchAppBarState.CLOSED)
 
     val searchTextState: MutableState<String> =
         mutableStateOf("")
@@ -50,17 +52,17 @@ class TaskViewModel @Inject constructor(
         } catch (e: Exception) {
             _searchTask.value = RequestState.Error(error = e)
         }
-        searchAppBarState.value = SearchAppBarState.TRIGGERED
+     //  searchAppBarState.value = SearchAppBarState.TRIGGERED
 
     }
 
-    val lowPriorityTask: StateFlow<List<ToDoTask>> =
+    val lowPriorityTask: StateFlow<List<Task>> =
         repository.sortByLowPriority.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
             emptyList()
         )
-    val highPriorityTask: StateFlow<List<ToDoTask>> =
+    val highPriorityTask: StateFlow<List<Task>> =
         repository.sortByHighPriority.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
@@ -74,11 +76,11 @@ class TaskViewModel @Inject constructor(
         _sortState.value = RequestState.Loading
         try {
             viewModelScope.launch {
-                dataStoreRepository.readSortState
+              /*  dataStoreRepository.readSortState
                     .map { Priority.valueOf(it) }
                     .collect {
                         _sortState.value = RequestState.Success(it)
-                    }
+                    }*/
             }
 
         } catch (e: Exception) {
@@ -88,7 +90,7 @@ class TaskViewModel @Inject constructor(
 
     fun persistSortState(priority: Priority) {
         viewModelScope.launch(Dispatchers.IO) {
-            dataStoreRepository.persistSortState(priority = priority)
+            //dataStoreRepository.persistSortState(priority = priority)
         }
     }
 
@@ -110,8 +112,8 @@ class TaskViewModel @Inject constructor(
 
     }
 
-    private var _selectedTask: MutableStateFlow<ToDoTask?> = MutableStateFlow(null)
-    val selectedTask: StateFlow<ToDoTask?> = _selectedTask
+    private var _selectedTask: MutableStateFlow<Task?> = MutableStateFlow(null)
+    val selectedTask: StateFlow<Task?> = _selectedTask
 
     fun getSelectedTask(taskId: Int) {
         viewModelScope.launch {
@@ -123,19 +125,19 @@ class TaskViewModel @Inject constructor(
 
     private fun addTask() {
         viewModelScope.launch(Dispatchers.IO) {
-            val toDoTask = ToDoTask(
+            val toDoTask = Task(
                 title = title.value,
                 description = description.value,
                 priority = priority.value
             )
             repository.addTask(toDoTask = toDoTask)
         }
-        searchAppBarState.value = SearchAppBarState.CLOSED
+        //searchAppBarState.value = SearchAppBarState.CLOSED
     }
 
     private fun updateTask() {
         viewModelScope.launch(Dispatchers.IO) {
-            val toDoTask = ToDoTask(
+            val toDoTask = Task(
                 id = id.value,
                 title = title.value,
                 description = description.value,
@@ -147,7 +149,7 @@ class TaskViewModel @Inject constructor(
 
     private fun deleteTask() {
         viewModelScope.launch(Dispatchers.IO) {
-            val toDoTask = ToDoTask(
+            val toDoTask = Task(
                 id = id.value,
                 title = title.value,
                 description = description.value,
@@ -187,7 +189,7 @@ class TaskViewModel @Inject constructor(
         this.action.value = Action.NO_ACTION
     }
 
-    fun updateTaskFields(selectedTask: ToDoTask?) {
+    fun updateTaskFields(selectedTask: Task?) {
         if (selectedTask != null) {
             id.value = selectedTask.id
             title.value = selectedTask.title

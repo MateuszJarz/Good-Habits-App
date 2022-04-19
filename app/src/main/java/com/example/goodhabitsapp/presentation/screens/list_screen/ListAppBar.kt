@@ -19,15 +19,17 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.goodhabitsapp.R
 import com.example.goodhabitsapp.domain.model.Priority
+import com.example.goodhabitsapp.presentation.screens.components.PriorityItem
 import com.example.goodhabitsapp.ui.theme.LARGE_PADDING
 import com.example.goodhabitsapp.ui.theme.TOP_APP_BAR_HEIGHT
 import com.example.goodhabitsapp.ui.theme.topAppBarBackgroundColor
 import com.example.goodhabitsapp.ui.theme.topAppBarContentColor
+import com.example.goodhabitsapp.util.TrailingIconState
 
 @Composable
 fun ListAppBar(
    // navController: NavController,
-   // sharedViewModel: SharedViewModel,
+   // taskViewModel : TaskViewModel
     //searchAppBarState: SearchAppBarState,
    // searchTextState: String
 ) {
@@ -182,7 +184,7 @@ fun SortAction(
                     onSortClicked(Priority.LOW)
                 }
             ) {
-                // TODO PriorityItem(priority = Priority.LOW)
+              PriorityItem(priority = Priority.LOW)
             }
             DropdownMenuItem(
                 onClick = {
@@ -190,7 +192,7 @@ fun SortAction(
                     onSortClicked(Priority.HIGH)
                 }
             ) {
-                // TODO PriorityItem PriorityItem(priority = Priority.HIGH)
+                 PriorityItem(priority = Priority.HIGH)
             }
             DropdownMenuItem(
                 onClick = {
@@ -198,7 +200,7 @@ fun SortAction(
                     onSortClicked(Priority.NONE)
                 }
             ) {
-                // TODO PriorityItem PriorityItem(priority = Priority.NONE)
+                  PriorityItem(priority = Priority.NONE)
             }
         }
     }
@@ -229,7 +231,7 @@ fun SearchAppBar(
 
 ) {
 
-  // TODO  var trailingIconState by remember { mutableStateOf(TrailingIconState.READY_TO_DELETE) }
+   var trailingIconState by remember { mutableStateOf(TrailingIconState.READY_TO_DELETE) }
 
     Surface(
         modifier = Modifier
@@ -272,8 +274,7 @@ fun SearchAppBar(
             },
             trailingIcon = {
                 IconButton(
-                    onClick = {
-                       /* TODO when (trailingIconState) {
+                    onClick = { when (trailingIconState) {
                             TrailingIconState.READY_TO_DELETE -> {
                                 onTextChange("")
                                 trailingIconState = TrailingIconState.READY_TO_CLOSE
@@ -286,7 +287,7 @@ fun SearchAppBar(
                                     trailingIconState = TrailingIconState.READY_TO_DELETE
                                 }
                             }
-                        }*/
+                        }
                     }
                 ) {
                     Icon(
