@@ -1,4 +1,4 @@
-package com.example.goodhabitsapp.presentation.screens.timer_screen
+package com.example.goodhabitsapp.presentation.screens.statistic_screen
 
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -7,21 +7,17 @@ import com.example.goodhabitsapp.presentation.navigation.Screen
 import com.example.goodhabitsapp.presentation.screens.components.app_bars.BottomMenuBar
 
 @Composable
-fun TimerScreen(
-    navController: NavHostController,
-
-    ) {
+fun StatisticScreen(
+    navController: NavHostController
+) {
 
     Scaffold(
-
         bottomBar = {
             BottomMenuBar(
                 onClickedList = { navController.navigate(Screen.List.route) },
                 onClickedPomodoro = { navController.navigate(Screen.Timer.route) },
                 onClickedStatistic = { navController.navigate(Screen.Statistic.route) }
             )
-
-
         }) {
 
     }
