@@ -108,7 +108,7 @@ fun HandleListContent(
 
     ) {
     if (tasks.isEmpty()) {
-        //TODO EmptyContent()
+        EmptyContent()
     } else {
         DisplayTasks(
             tasks = tasks,
