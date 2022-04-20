@@ -2,4 +2,12 @@
 <resources>
     <string name="app_name">GoodHabitsApp</string>
     <string name="logo_image">Logo Image</string>
+
+
+    <string name="delete_task">Remove \'%1$s\?</string>
+    <string name="delete_task_confirmation">Are you sure you want to remove \'%1$s\?</string>
+
+    <string name="delete_all_task">Remove All Tasks?</string>
+    <string name="delete_all_task_confirmation">Are you sure you want to remove
+        all tasks? There is no going back after this action </string>
 </resources>

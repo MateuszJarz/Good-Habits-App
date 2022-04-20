@@ -1,7 +1,7 @@
 package com.example.goodhabitsapp.presentation.screens.todotask_screen.task_screen
 
 import androidx.compose.material.*
-import androidx.compose.material.R
+
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -11,8 +11,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.goodhabitsapp.R
 import com.example.goodhabitsapp.domain.model.Priority
 import com.example.goodhabitsapp.domain.model.Task
+import com.example.goodhabitsapp.presentation.screens.components.DisplayAlertDialog
 import com.example.goodhabitsapp.ui.theme.topAppBarBackgroundColor
 import com.example.goodhabitsapp.ui.theme.topAppBarContentColor
 import com.example.goodhabitsapp.util.Action
@@ -134,7 +136,7 @@ fun ExistingTaskAppBarActions(
         mutableStateOf(false)
     }
     DisplayAlertDialog(
-        title = stringResource(id = R.string.delete_icon, selectedTask.title),
+        title = stringResource(id = R.string.delete_task, selectedTask.title),
         message = stringResource(id = R.string.delete_task_confirmation, selectedTask.title),
         openDialog = openDialog,
         closeDialog = { openDialog = false },
