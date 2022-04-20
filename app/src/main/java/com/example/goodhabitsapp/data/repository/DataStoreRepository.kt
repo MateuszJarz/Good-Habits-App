@@ -45,7 +45,7 @@ class DataStoreRepository @Inject constructor(
                 throw exception
             }
         }
-        .map {preferences ->
+        .map { preferences ->
             val sortState = preferences[PreferencesKeys.sortKey] ?: Priority.NONE.name
             sortState
         }

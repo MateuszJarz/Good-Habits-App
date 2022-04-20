@@ -20,8 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
-        private val repository: TaskRepository,
-         private val dataStoreRepository: DataStoreRepository
+    private val repository: TaskRepository,
+    private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
     val action: MutableState<Action> = mutableStateOf(Action.NO_ACTION)
 
@@ -32,7 +32,7 @@ class TaskViewModel @Inject constructor(
 
 
     val searchAppBarState: MutableState<SearchAppBarState> =
-       mutableStateOf(SearchAppBarState.CLOSED)
+        mutableStateOf(SearchAppBarState.CLOSED)
 
     val searchTextState: MutableState<String> =
         mutableStateOf("")
@@ -53,7 +53,7 @@ class TaskViewModel @Inject constructor(
         } catch (e: Exception) {
             _searchTask.value = RequestState.Error(error = e)
         }
-       searchAppBarState.value = SearchAppBarState.TRIGGERED
+        searchAppBarState.value = SearchAppBarState.TRIGGERED
 
     }
 
@@ -77,7 +77,7 @@ class TaskViewModel @Inject constructor(
         _sortState.value = RequestState.Loading
         try {
             viewModelScope.launch {
-               dataStoreRepository.readSortState
+                dataStoreRepository.readSortState
                     .map { Priority.valueOf(it) }
                     .collect {
                         _sortState.value = RequestState.Success(it)

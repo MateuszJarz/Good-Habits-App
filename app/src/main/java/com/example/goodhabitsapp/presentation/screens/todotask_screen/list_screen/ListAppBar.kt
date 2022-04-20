@@ -14,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import com.example.goodhabitsapp.R
 import com.example.goodhabitsapp.domain.model.Priority
 import com.example.goodhabitsapp.presentation.screens.components.DisplayAlertDialog
@@ -33,7 +33,7 @@ import com.example.goodhabitsapp.view_models.TaskViewModel
 
 @Composable
 fun ListAppBar(
-    taskViewModel : TaskViewModel,
+    taskViewModel: TaskViewModel,
     searchAppBarState: SearchAppBarState,
     searchTextState: String
 ) {
@@ -72,6 +72,7 @@ fun ListAppBar(
     }
 
 }
+
 @Composable
 fun DefaultListAppBar(
     onSearchClicked: () -> Unit,
@@ -112,8 +113,8 @@ fun ListAppBarActions(
 
 
     DisplayAlertDialog(
-        title =  "",
-        message =   "",
+        title = stringResource(id = R.string.delete_all_task),
+        message = stringResource(id = R.string.delete_all_task_confirmation),
         openDialog = openDialog,
         closeDialog = { openDialog = false },
         onYesClicked = {
@@ -188,7 +189,7 @@ fun SortAction(
                     onSortClicked(Priority.LOW)
                 }
             ) {
-              PriorityItem(priority = Priority.LOW)
+                PriorityItem(priority = Priority.LOW)
             }
             DropdownMenuItem(
                 onClick = {
@@ -196,7 +197,7 @@ fun SortAction(
                     onSortClicked(Priority.HIGH)
                 }
             ) {
-                 PriorityItem(priority = Priority.HIGH)
+                PriorityItem(priority = Priority.HIGH)
             }
             DropdownMenuItem(
                 onClick = {
@@ -204,7 +205,7 @@ fun SortAction(
                     onSortClicked(Priority.NONE)
                 }
             ) {
-                  PriorityItem(priority = Priority.NONE)
+                PriorityItem(priority = Priority.NONE)
             }
         }
     }
@@ -235,7 +236,7 @@ fun SearchAppBar(
 
 ) {
 
-   var trailingIconState by remember { mutableStateOf(TrailingIconState.READY_TO_DELETE) }
+    var trailingIconState by remember { mutableStateOf(TrailingIconState.READY_TO_DELETE) }
 
     Surface(
         modifier = Modifier
@@ -278,7 +279,8 @@ fun SearchAppBar(
             },
             trailingIcon = {
                 IconButton(
-                    onClick = { when (trailingIconState) {
+                    onClick = {
+                        when (trailingIconState) {
                             TrailingIconState.READY_TO_DELETE -> {
                                 onTextChange("")
                                 trailingIconState = TrailingIconState.READY_TO_CLOSE

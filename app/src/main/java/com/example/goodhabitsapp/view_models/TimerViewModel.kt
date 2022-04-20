@@ -1,34 +1,81 @@
 package com.example.goodhabitsapp.view_models
 
 import android.os.CountDownTimer
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.goodhabitsapp.util.Utility
+import com.example.goodhabitsapp.util.Utility.formatTime
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import java.util.concurrent.TimeUnit
 
-@HiltViewModel
-class Timer : ViewModel() {
-    private var timer: CountDownTimer? = null
-    private var decreaseSecond: Int = 30
+//@HiltViewModel
+class TimerViewModel : ViewModel() {
 
-    private val _second = MutableStateFlow(0)
-    val second: StateFlow<Int> = _second
+    //region Properties
+    private var countDownTimer: CountDownTimer? = null
+    //endregion
 
-    fun decreaseCountDown(totalSec: Long) {
-        val totalTime = TimeUnit.MINUTES.toMinutes(totalSec) % 60
-        timer = object : CountDownTimer(totalSec, 1000) {
-            override fun onTick(milliSec: Long) {
-                _second.value = decreaseSecond
-                decreaseSecond--
+    //region States
+    private val _time = MutableStateFlow(Utility.TIME_COUNTDOWN.formatTime())
+    val time: StateFlow<String> = _time
+
+    private val _progress = MutableStateFlow(1.00F)
+    val progress: StateFlow<Float> = _progress
+
+    private val _isPlaying = MutableStateFlow(false)
+    val isPlaying: StateFlow<Boolean> = _isPlaying
+
+
+    var progressValue = 0F
+
+    //region Public methods
+    fun handleCountDownTimer() {
+        if (isPlaying.value == true) {
+            pauseTimer()
+
+        } else {
+            startTimer()
+        }
+    }
+    //endregion
+
+    //region Private methods
+    private fun pauseTimer() {
+        countDownTimer?.cancel()
+
+        //handleTimerValues(false, _time.value, progress = progress.value)
+        handleTimerValues(false, Utility.TIME_COUNTDOWN.formatTime(), progress = 1.0f)
+
+
+    }
+
+    private fun startTimer() {
+
+        _isPlaying.value = true
+        countDownTimer = object : CountDownTimer(Utility.TIME_COUNTDOWN, 1000) {
+
+            override fun onTick(millisRemaining: Long) {
+
+                progressValue = millisRemaining.toFloat() / Utility.TIME_COUNTDOWN
+
+                handleTimerValues(true, millisRemaining.formatTime(), progressValue)
+
             }
 
             override fun onFinish() {
-                Log.d("TAG", "Decrease Time finished")
-            }
-        }
+                pauseTimer()
 
-        timer?.start()
+            }
+        }.start()
+    }
+
+    private fun handleTimerValues(
+        isPlaying: Boolean,
+        time: String,
+        progress: Float,
+    ) {
+        _isPlaying.value = isPlaying
+        _time.value = time
+        _progress.value = progress
     }
 }
+//endregion

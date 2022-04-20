@@ -20,7 +20,7 @@ fun DisplayAlertDialog(
                 Text(
                     text = title,
                     fontSize = MaterialTheme.typography.h5.fontSize,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
                 )
             },
             text = {

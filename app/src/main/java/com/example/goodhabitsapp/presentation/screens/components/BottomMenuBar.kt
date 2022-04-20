@@ -39,7 +39,7 @@ fun BottomMenuBarComponent(
     ) {
         IconButton(
             modifier = Modifier.weight(1f),
-            onClick = {onClickedList()}
+            onClick = { onClickedList() }
         ) {
             Icon(
                 imageVector = Icons.Filled.CheckCircle,
@@ -48,7 +48,7 @@ fun BottomMenuBarComponent(
         }
         IconButton(
             modifier = Modifier.weight(1f),
-            onClick = {onClickedTimer()}
+            onClick = { onClickedTimer() }
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_schedule),
@@ -57,7 +57,7 @@ fun BottomMenuBarComponent(
         }
         IconButton(
             modifier = Modifier.weight(1f),
-            onClick = {onClickedStatistic()}
+            onClick = { onClickedStatistic() }
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_bar_chart),

@@ -47,7 +47,7 @@ fun ListContent(
     navigateToDoTaskScreen: (taskId: Int) -> Unit,
     onSwipeToDelete: (Action, Task) -> Unit
 
-    ) {
+) {
     if (sortState is RequestState.Success) {
         when {
             searchAppBarState == SearchAppBarState.TRIGGERED -> {
@@ -99,7 +99,7 @@ fun HandleListContent(
     tasks: List<Task>,
     onSwipeToDelete: (Action, Task) -> Unit,
     navigateToDoTaskScreen: (taskId: Int) -> Unit
-    ) {
+) {
     if (tasks.isEmpty()) {
         EmptyContent()
     } else {
@@ -123,7 +123,7 @@ fun DisplayTasks(
     tasks: List<Task>,
     onSwipeToDelete: (Action, Task) -> Unit,
     navigateToDoTaskScreen: (taskId: Int) -> Unit,
-    ) {
+) {
     LazyColumn {
         items(
             items = tasks,

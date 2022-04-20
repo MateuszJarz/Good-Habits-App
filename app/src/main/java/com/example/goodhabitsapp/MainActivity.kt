@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.goodhabitsapp.presentation.navigation.SetupNavigation
 import com.example.goodhabitsapp.ui.theme.GoodHabitsAppTheme
 import com.example.goodhabitsapp.view_models.TaskViewModel
+import com.example.goodhabitsapp.view_models.TimerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -20,7 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController
-    private val taskViewModel : TaskViewModel by viewModels()
+    private val taskViewModel: TaskViewModel by viewModels()
+    private val timerViewModel: TimerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +31,8 @@ class MainActivity : ComponentActivity() {
                 navController = rememberNavController()
                 SetupNavigation(
                     navController = navController,
-                    taskViewModel = taskViewModel
+                    taskViewModel = taskViewModel,
+                    timerViewModel = timerViewModel
                 )
 
             }

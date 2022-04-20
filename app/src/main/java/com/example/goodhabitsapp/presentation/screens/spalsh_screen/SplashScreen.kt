@@ -63,8 +63,7 @@ fun SplashScreen(
             modifier = Modifier
                 .size(SIZE_LOGO)
                 .offset(y = offsetState)
-                .alpha(alpha = alphaState)
-            ,
+                .alpha(alpha = alphaState),
             painter = painterResource(id = getLogo()),
             contentDescription = stringResource(R.string.logo_image),
 

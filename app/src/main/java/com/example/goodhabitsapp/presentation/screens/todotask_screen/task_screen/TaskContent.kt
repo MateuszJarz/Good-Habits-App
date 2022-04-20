@@ -8,7 +8,6 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.goodhabitsapp.domain.model.Priority
 import com.example.goodhabitsapp.presentation.screens.components.PriorityDropDown

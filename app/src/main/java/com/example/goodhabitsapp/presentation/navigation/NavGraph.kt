@@ -10,13 +10,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.goodhabitsapp.presentation.screens.SplashScreen
-import com.example.goodhabitsapp.presentation.screens.todotask_screen.list_screen.ListScreen
 import com.example.goodhabitsapp.presentation.screens.statistic_screen.StatisticScreen
 import com.example.goodhabitsapp.presentation.screens.timer_screen.TimerScreen
+import com.example.goodhabitsapp.presentation.screens.todotask_screen.list_screen.ListScreen
 import com.example.goodhabitsapp.presentation.screens.todotask_screen.task_screen.TaskScreen
 import com.example.goodhabitsapp.util.Constants
 import com.example.goodhabitsapp.util.toAction
 import com.example.goodhabitsapp.view_models.TaskViewModel
+import com.example.goodhabitsapp.view_models.TimerViewModel
 
 
 @ExperimentalMaterialApi
@@ -24,7 +25,8 @@ import com.example.goodhabitsapp.view_models.TaskViewModel
 @Composable
 fun SetupNavigation(
     navController: NavHostController,
-    taskViewModel: TaskViewModel
+    taskViewModel: TaskViewModel,
+    timerViewModel: TimerViewModel
 ) {
 
     NavHost(
@@ -39,7 +41,10 @@ fun SetupNavigation(
 
         //TIMER
         composable(route = Screen.Timer.route) {
-            TimerScreen(navController = navController)
+            TimerScreen(
+                navController = navController,
+                timerViewModel = timerViewModel
+            )
         }
 
         //STATISTIC
@@ -51,7 +56,8 @@ fun SetupNavigation(
         //LIST
         composable(route = Screen.List.route) { navBackStackEntry ->
 
-            val action = navBackStackEntry.arguments?.getString(Constants.LIST_ARGUMENT_KEY).toAction()
+            val action =
+                navBackStackEntry.arguments?.getString(Constants.LIST_ARGUMENT_KEY).toAction()
 
             LaunchedEffect(key1 = action) {
                 taskViewModel.action.value = action
@@ -64,8 +70,9 @@ fun SetupNavigation(
 
         //TASK
         composable(route = Screen.Task.route) { navBackStackEntry ->
-            val taskId = navBackStackEntry.arguments!!.getString(Constants.TASK_ARGUMENT_KEY)!!.toInt()
-            LaunchedEffect(key1 = taskId){
+            val taskId =
+                navBackStackEntry.arguments!!.getString(Constants.TASK_ARGUMENT_KEY)!!.toInt()
+            LaunchedEffect(key1 = taskId) {
                 taskViewModel.getSelectedTask(taskId = taskId)
             }
             val selectedTask by taskViewModel.selectedTask.collectAsState()
@@ -76,7 +83,7 @@ fun SetupNavigation(
                 }
             }
             TaskScreen(
-                selectedTask =selectedTask,
+                selectedTask = selectedTask,
                 taskViewModel = taskViewModel,
                 navController = navController
             )
