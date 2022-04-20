@@ -1,4 +1,4 @@
-package com.example.goodhabitsapp.presentation.screens.list_screen
+package com.example.goodhabitsapp.presentation.screens.todotask_screen.list_screen
 
 import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -22,14 +22,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun ListScreen(
     navController: NavHostController,
-    //  navigateToTaskScreen: (taskId: Int) -> Unit,
     taskViewModel: TaskViewModel
 ) {
 
     LaunchedEffect(key1 = true) {
         Log.d("ListScreen", "LaunchedEffect Triggered!")
-          taskViewModel.getAllTask()
-          taskViewModel.readSortState()
+        taskViewModel.getAllTask()
+        taskViewModel.readSortState()
     }
 
     val action by taskViewModel.action
@@ -48,20 +47,20 @@ fun ListScreen(
     val scaffoldState = rememberScaffoldState()
 
 
-     DisplaySnackBar(
-         scaffoldState = scaffoldState,
-         handleDatabaseActions = { taskViewModel.handleDatabaseActions(action = action) },
-         onUndoClicked = {
-             taskViewModel.action.value = it
-         },
-         taskTitle = taskViewModel.title.value,
-         action = action
-     )
+    DisplaySnackBar(
+        scaffoldState = scaffoldState,
+        handleDatabaseActions = { taskViewModel.handleDatabaseActions(action = action) },
+        onUndoClicked = {
+            taskViewModel.action.value = it
+        },
+        taskTitle = taskViewModel.title.value,
+        action = action
+    )
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
             ListAppBar(
-                 navController = navController,
+                navController = navController,
                 taskViewModel = taskViewModel,
                 searchAppBarState = searchAppBarState,
                 searchTextState = searchTextState
@@ -83,22 +82,21 @@ fun ListScreen(
         },
 
         content = {
-            /* TODO ListContent(
-                 allTasks = allTasks,
-                 searchTasks = searchTasks,
-                 lowPriorityTask = lowPriorityTasks,
-                 highPriorityTask = highPriorityTasks,
-                 sortState = sortState,
-                 searchAppBarState = searchAppBarState,
-                 navigateToDoTaskScreen = {  taskId ->
-                     navController.navigate(Screen.Task.passTaskId(taskId))
-                     Log.d("taskId",taskId.toString())
-                 },
-                 onSwipeToDelete = { action, task ->
-                     sharedViewModel.action.value = action
-                     sharedViewModel.updateTaskFields(selectedTask = task)
-                 },
-                 )*/
+            ListContent(
+                allTasks = allTasks,
+                searchTasks = searchTasks,
+                lowPriorityTask = lowPriorityTasks,
+                highPriorityTask = highPriorityTasks,
+                sortState = sortState,
+                searchAppBarState = searchAppBarState,
+                navigateToDoTaskScreen = { taskId ->
+                    navController.navigate(Screen.Task.passTaskId(taskId))
+                },
+                onSwipeToDelete = { action, task ->
+                    taskViewModel.action.value = action
+                    taskViewModel.updateTaskFields(selectedTask = task)
+                },
+            )
         },
         floatingActionButton = {
             ListFab(onFabClick = { taskId ->
