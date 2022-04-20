@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.goodhabitsapp.R
 import com.example.goodhabitsapp.domain.model.Priority
+import com.example.goodhabitsapp.presentation.screens.components.DisplayAlertDialog
 import com.example.goodhabitsapp.presentation.screens.components.PriorityItem
 import com.example.goodhabitsapp.ui.theme.LARGE_PADDING
 import com.example.goodhabitsapp.ui.theme.TOP_APP_BAR_HEIGHT
@@ -110,8 +111,8 @@ fun ListAppBarActions(
 
     var openDialog by remember { mutableStateOf(false) }
 
-    /*TODO DisplayAlertDialog */
-/*    DisplayAlertDialog(
+
+    DisplayAlertDialog(
         title =  "",
         message =   "",
         openDialog = openDialog,
@@ -119,7 +120,7 @@ fun ListAppBarActions(
         onYesClicked = {
             onDeleteAllConfirmed()
         }
-    )*/
+    )
     SearchAction(onSearchClicked = onSearchClicked)
     SortAction(onSortClicked = onSortClicked)
     DeleteAllAction(
