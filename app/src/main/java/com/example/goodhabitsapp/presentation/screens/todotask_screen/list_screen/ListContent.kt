@@ -114,6 +114,7 @@ fun HandleListContent(
 
 }
 
+
 @SuppressLint("CoroutineCreationDuringComposition")
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
@@ -122,7 +123,6 @@ fun DisplayTasks(
     tasks: List<Task>,
     onSwipeToDelete: (Action, Task) -> Unit,
     navigateToDoTaskScreen: (taskId: Int) -> Unit,
-
     ) {
     LazyColumn {
         items(

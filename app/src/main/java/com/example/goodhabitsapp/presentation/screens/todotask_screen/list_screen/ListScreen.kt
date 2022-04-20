@@ -60,7 +60,6 @@ fun ListScreen(
         scaffoldState = scaffoldState,
         topBar = {
             ListAppBar(
-                navController = navController,
                 taskViewModel = taskViewModel,
                 searchAppBarState = searchAppBarState,
                 searchTextState = searchTextState

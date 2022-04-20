@@ -4,6 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.goodhabitsapp.data.repository.DataStoreRepository
 import com.example.goodhabitsapp.data.repository.TaskRepository
 import com.example.goodhabitsapp.domain.model.Priority
 import com.example.goodhabitsapp.domain.model.Task
@@ -13,17 +14,14 @@ import com.example.goodhabitsapp.util.RequestState
 import com.example.goodhabitsapp.util.SearchAppBarState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
         private val repository: TaskRepository,
-    /* private val dataStoreRepository: DataStoreRepository */
+         private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
     val action: MutableState<Action> = mutableStateOf(Action.NO_ACTION)
 
@@ -79,11 +77,11 @@ class TaskViewModel @Inject constructor(
         _sortState.value = RequestState.Loading
         try {
             viewModelScope.launch {
-              /* dataStoreRepository.readSortState
+               dataStoreRepository.readSortState
                     .map { Priority.valueOf(it) }
                     .collect {
                         _sortState.value = RequestState.Success(it)
-                    }*/
+                    }
             }
 
         } catch (e: Exception) {
@@ -93,7 +91,7 @@ class TaskViewModel @Inject constructor(
 
     fun persistSortState(priority: Priority) {
         viewModelScope.launch(Dispatchers.IO) {
-            //dataStoreRepository.persistSortState(priority = priority)
+            dataStoreRepository.persistSortState(priority = priority)
         }
     }
 

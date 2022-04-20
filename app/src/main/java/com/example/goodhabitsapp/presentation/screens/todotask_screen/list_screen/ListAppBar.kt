@@ -33,7 +33,6 @@ import com.example.goodhabitsapp.view_models.TaskViewModel
 
 @Composable
 fun ListAppBar(
-    navController: NavController,
     taskViewModel : TaskViewModel,
     searchAppBarState: SearchAppBarState,
     searchTextState: String
