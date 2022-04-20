@@ -21,7 +21,7 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
             )
         }
 
-        // Observe the internal MutableLiveData
+        // Observe the internal MutableLiveDat
         super.observe(
             owner,
             Observer<T> { t ->
