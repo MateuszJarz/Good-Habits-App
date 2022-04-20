@@ -45,8 +45,7 @@ fun ListContent(
     sortState: RequestState<Priority>,
     searchAppBarState: SearchAppBarState,
     navigateToDoTaskScreen: (taskId: Int) -> Unit,
-    onSwipeToDelete: (Action, Task) -> Unit,
-
+    onSwipeToDelete: (Action, Task) -> Unit
 
     ) {
     if (sortState is RequestState.Success) {
@@ -55,7 +54,6 @@ fun ListContent(
                 if (searchTasks is RequestState.Success) {
                     HandleListContent(
                         tasks = searchTasks.data,
-
                         onSwipeToDelete = onSwipeToDelete,
                         navigateToDoTaskScreen = navigateToDoTaskScreen
                     )
@@ -66,7 +64,6 @@ fun ListContent(
                 if (allTasks is RequestState.Success) {
                     HandleListContent(
                         tasks = allTasks.data,
-
                         onSwipeToDelete = onSwipeToDelete,
                         navigateToDoTaskScreen = navigateToDoTaskScreen
 
@@ -76,7 +73,6 @@ fun ListContent(
             sortState.data == Priority.LOW -> {
                 HandleListContent(
                     tasks = lowPriorityTask,
-
                     onSwipeToDelete = onSwipeToDelete,
                     navigateToDoTaskScreen = navigateToDoTaskScreen
                 )
@@ -84,7 +80,6 @@ fun ListContent(
             sortState.data == Priority.HIGH -> {
                 HandleListContent(
                     tasks = highPriorityTask,
-
                     onSwipeToDelete = onSwipeToDelete,
                     navigateToDoTaskScreen = navigateToDoTaskScreen
 
@@ -103,9 +98,7 @@ fun ListContent(
 fun HandleListContent(
     tasks: List<Task>,
     onSwipeToDelete: (Action, Task) -> Unit,
-    navigateToDoTaskScreen: (taskId: Int) -> Unit,
-
-
+    navigateToDoTaskScreen: (taskId: Int) -> Unit
     ) {
     if (tasks.isEmpty()) {
         EmptyContent()
