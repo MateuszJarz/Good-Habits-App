@@ -11,12 +11,12 @@ import com.example.goodhabitsapp.ui.theme.MediumPriorityColor
 import com.example.goodhabitsapp.ui.theme.NonePriorityColor
 import com.example.goodhabitsapp.util.Constants.STAT_DATABASE_TABLE
 
-enum class Statistics() {
-    TASK_COMPLETED,
-    TASK_NON_COMPLETED,
-    ZERO
+/*enum class Statistics(number : Int) {
+    TASK_COMPLETED(0) ,
+    TASK_NON_COMPLETED(0),
+    ZERO(0)
 
-}
+}*/
 /* TODO
 @Entity(tableName = STAT_DATABASE_TABLE)
 data class Statistics(

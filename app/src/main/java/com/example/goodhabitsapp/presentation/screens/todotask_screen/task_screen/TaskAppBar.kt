@@ -218,7 +218,7 @@ fun ExistingTaskAppBarPreview() {
             "title",
             "description",
             Priority.HIGH,
-            statistics = Statistics.ZERO
+            taskCompleted = 0, taskNotCompleted = 0
         )
     )
 }

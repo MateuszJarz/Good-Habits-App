@@ -11,5 +11,6 @@ data class Task(
     val title: String,
     val description: String,
     val priority: Priority,
-    val statistics: Statistics
+    val taskCompleted: Int = 0,
+    val taskNotCompleted: Int = 0
 )

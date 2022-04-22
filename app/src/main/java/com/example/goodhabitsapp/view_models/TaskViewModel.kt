@@ -129,7 +129,9 @@ class TaskViewModel @Inject constructor(
             val toDoTask = Task(
                 title = title.value,
                 description = description.value,
-                priority = priority.value
+                priority = priority.value,
+                taskCompleted = 0,
+                taskNotCompleted = 0
             )
             repository.addTask(toDoTask = toDoTask)
         }
@@ -142,7 +144,9 @@ class TaskViewModel @Inject constructor(
                 id = id.value,
                 title = title.value,
                 description = description.value,
-                priority = priority.value
+                priority = priority.value,
+                taskCompleted = 0,
+                taskNotCompleted = 0
             )
             repository.updateTask(toDoTask = toDoTask)
         }
@@ -154,7 +158,9 @@ class TaskViewModel @Inject constructor(
                 id = id.value,
                 title = title.value,
                 description = description.value,
-                priority = priority.value
+                priority = priority.value,
+                taskCompleted = 0,
+                taskNotCompleted = 0
             )
             repository.deleteTask(toDoTask = toDoTask)
         }
