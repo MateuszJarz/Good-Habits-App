@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.goodhabitsapp.domain.model.Priority
 import com.example.goodhabitsapp.domain.model.Task
 import com.example.goodhabitsapp.ui.theme.*
@@ -220,51 +221,70 @@ fun TaskItem(
             navigateToDoTaskScreen(toDoTask.id)
         }
     ) {
-        Column(
-            Modifier
-                .padding(all = LARGE_PADDING)
-                .fillMaxWidth()
-        ) {
+      
+      Row(modifier = Modifier.fillMaxWidth().height(65.dp)
+      
+      ) {
+          
+          Column(
+              Modifier
+                  .fillMaxWidth(0.8f)
+                  .padding(all = LARGE_PADDING)
+                 // .fillMaxWidth()
+          ) {
 
-            Row {
-                Text(
-                    modifier = Modifier.weight(8f),
-                    text = toDoTask.title,
-                    color = MaterialTheme.colors.taskItemTextColor,
-                    style = MaterialTheme.typography.h5,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    contentAlignment = Alignment.TopEnd
-                ) {
-                    Canvas(
-                        modifier = Modifier
-                            .width(PRIORITY_INDICATOR_SIZE)
-                            .height(
-                                PRIORITY_INDICATOR_SIZE
-                            )
-                    ) {
-                        drawCircle(
-                            color = toDoTask.priority.color
-                        )
-                    }
-                }
-            }
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                color = MaterialTheme.colors.taskItemTextColor,
-                text = toDoTask.description,
-                style = MaterialTheme.typography.subtitle1,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
+              Row {
+                  Text(
+                      modifier = Modifier.weight(8f),
+                      text = toDoTask.title,
+                      color = MaterialTheme.colors.taskItemTextColor,
+                      style = MaterialTheme.typography.h5,
+                      fontWeight = FontWeight.Bold,
+                      maxLines = 1
+                  )
+                  Box(
+                      modifier = Modifier
+                          .fillMaxWidth()
+                          .weight(1f),
+                      contentAlignment = Alignment.TopEnd
+                  ) {
+                      Canvas(
+                          modifier = Modifier
+                              .width(PRIORITY_INDICATOR_SIZE)
+                              .height(
+                                  PRIORITY_INDICATOR_SIZE
+                              )
+                      ) {
+                          drawCircle(
+                              color = toDoTask.priority.color
+                          )
+                      }
+                  }
+              }
+              Text(
+                  modifier = Modifier.fillMaxWidth(0.8f),
+                  color = MaterialTheme.colors.taskItemTextColor,
+                  text = toDoTask.description,
+                  style = MaterialTheme.typography.subtitle1,
+                  maxLines = 2,
+                  overflow = TextOverflow.Ellipsis
+              )
 
-        }
 
+          }
+          Box(modifier = Modifier
+              .fillMaxSize()
+              .background(Purple200.copy(ContentAlpha.medium))
+          ,) {
+
+              Checkbox(
+                  modifier = Modifier.align(Alignment.Center),
+                  checked = false, onCheckedChange ={}
+              )
+          }
+      }
+       
+        
     }
 }
 
@@ -280,7 +300,8 @@ fun TaskItemPrev() {
             description = "Some random text",
             priority = Priority.HIGH,
             taskCompleted = 0,
-            taskNotCompleted = 0),
+            taskNotCompleted = 0
+        ),
         navigateToDoTaskScreen = {})
 
 
