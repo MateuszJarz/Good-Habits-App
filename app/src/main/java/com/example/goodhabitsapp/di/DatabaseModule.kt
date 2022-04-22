@@ -3,7 +3,7 @@ package com.example.goodhabitsapp.di
 import android.content.Context
 import androidx.room.Room
 import com.example.goodhabitsapp.data.TaskDatabase
-import com.example.goodhabitsapp.util.Constants.DATABASE_NAME
+import com.example.goodhabitsapp.util.Constants.TASK_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +22,7 @@ object DatabaseModule {
     ) = Room.databaseBuilder(
         context,
         TaskDatabase::class.java,
-        DATABASE_NAME
+        TASK_DATABASE_NAME
     ).build()
 
 

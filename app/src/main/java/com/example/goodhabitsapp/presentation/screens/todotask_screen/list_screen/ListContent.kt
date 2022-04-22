@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.goodhabitsapp.domain.model.Priority
+import com.example.goodhabitsapp.domain.model.Statistics
 import com.example.goodhabitsapp.domain.model.Task
 import com.example.goodhabitsapp.ui.theme.*
 import com.example.goodhabitsapp.util.Action
@@ -279,7 +280,7 @@ fun TaskItemPrev() {
             title = "Test1",
             description = "Some random text",
             priority = Priority.HIGH,
-        ),
+             statistics = Statistics.ZERO ),
         navigateToDoTaskScreen = {})
 
 

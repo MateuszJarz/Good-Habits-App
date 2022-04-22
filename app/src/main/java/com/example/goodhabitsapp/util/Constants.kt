@@ -2,8 +2,11 @@ package com.example.goodhabitsapp.util
 
 object Constants {
 
-    const val DATABASE_TABLE = "task_table"
-    const val DATABASE_NAME = "task_database"
+    const val TASK_DATABASE_TABLE = "task_table"
+    const val TASK_DATABASE_NAME = "task_database"
+
+    const val STAT_DATABASE_TABLE = "statistic_table"
+    const val STAT_DATABASE_NAME = "statistic_database"
 
     const val LIST_ARGUMENT_KEY = "action"
     const val TASK_ARGUMENT_KEY = "taskId"
