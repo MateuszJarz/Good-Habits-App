@@ -17,21 +17,14 @@ import com.example.goodhabitsapp.util.Constants.STAT_DATABASE_TABLE
     ZERO(0)
 
 }*/
-/* TODO
+
+
 @Entity(tableName = STAT_DATABASE_TABLE)
 data class Statistics(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val taskId: Int = 0,
+    @PrimaryKey(autoGenerate = false)
+    val id: Int = 1,
     val tasksCompleted: Int = 0,
     val tasksNotCompleted: Int = 0,
 )
 
-data class TaskAndStatsRelation(
-    @Embedded val task: Task,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "taskId"
-    )
-    val statistics: Statistics
-)*/
+

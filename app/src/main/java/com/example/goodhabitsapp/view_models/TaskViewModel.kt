@@ -5,8 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goodhabitsapp.data.repository.DataStoreRepository
+import com.example.goodhabitsapp.data.repository.StatRepository
 import com.example.goodhabitsapp.data.repository.TaskRepository
 import com.example.goodhabitsapp.domain.model.Priority
+import com.example.goodhabitsapp.domain.model.Statistics
 import com.example.goodhabitsapp.domain.model.Task
 import com.example.goodhabitsapp.util.Action
 import com.example.goodhabitsapp.util.Constants.MAX_TITLE_LENGTH
@@ -20,7 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
-    private val repository: TaskRepository,
+    private val taskRepository: TaskRepository,
+    private val statRepository: StatRepository,
     private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
     val action: MutableState<Action> = mutableStateOf(Action.NO_ACTION)
@@ -29,6 +32,7 @@ class TaskViewModel @Inject constructor(
     val title: MutableState<String> = mutableStateOf("")
     val description: MutableState<String> = mutableStateOf("")
     val priority: MutableState<Priority> = mutableStateOf(Priority.LOW)
+
 
 
     val searchAppBarState: MutableState<SearchAppBarState> =
@@ -44,7 +48,7 @@ class TaskViewModel @Inject constructor(
         _searchTask.value = RequestState.Loading
         try {
             viewModelScope.launch {
-                repository.searchDatabase(searchQuery = "%$searchQuery%")
+                taskRepository.searchDatabase(searchQuery = "%$searchQuery%")
                     .collect { searchTask ->
                         _searchTask.value = RequestState.Success(searchTask)
                     }
@@ -58,13 +62,13 @@ class TaskViewModel @Inject constructor(
     }
 
     val lowPriorityTask: StateFlow<List<Task>> =
-        repository.sortByLowPriority.stateIn(
+        taskRepository.sortByLowPriority.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
             emptyList()
         )
     val highPriorityTask: StateFlow<List<Task>> =
-        repository.sortByHighPriority.stateIn(
+        taskRepository.sortByHighPriority.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
             emptyList()
@@ -102,7 +106,7 @@ class TaskViewModel @Inject constructor(
         _allTask.value = RequestState.Loading
         try {
             viewModelScope.launch {
-                repository.getAllTask.collect { allTask ->
+                taskRepository.getAllTask.collect { allTask ->
                     _allTask.value = RequestState.Success(allTask)
                 }
             }
@@ -118,7 +122,7 @@ class TaskViewModel @Inject constructor(
 
     fun getSelectedTask(taskId: Int) {
         viewModelScope.launch {
-            repository.getSelectedTask(taskId = taskId).collect { task ->
+            taskRepository.getSelectedTask(taskId = taskId).collect { task ->
                 _selectedTask.value = task
             }
         }
@@ -133,7 +137,7 @@ class TaskViewModel @Inject constructor(
                 taskCompleted = 0,
                 taskNotCompleted = 0
             )
-            repository.addTask(toDoTask = toDoTask)
+            taskRepository.addTask(toDoTask = toDoTask)
         }
         searchAppBarState.value = SearchAppBarState.CLOSED
     }
@@ -148,7 +152,27 @@ class TaskViewModel @Inject constructor(
                 taskCompleted = 0,
                 taskNotCompleted = 0
             )
-            repository.updateTask(toDoTask = toDoTask)
+            taskRepository.updateTask(toDoTask = toDoTask)
+        }
+    }
+
+    private fun completedTask() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val toDoTask = Task(
+                id = id.value,
+                title = title.value,
+                description = description.value,
+                priority = priority.value,
+                taskCompleted = 0,
+                taskNotCompleted = 0
+            )
+          /*  val statistics = Statistics(
+                id = 1,
+                tasksCompleted = 1,
+                tasksNotCompleted = 0,
+            )*/
+            statRepository.updateStats()
+            taskRepository.deleteTask(toDoTask = toDoTask)
         }
     }
 
@@ -162,13 +186,13 @@ class TaskViewModel @Inject constructor(
                 taskCompleted = 0,
                 taskNotCompleted = 0
             )
-            repository.deleteTask(toDoTask = toDoTask)
+            taskRepository.deleteTask(toDoTask = toDoTask)
         }
     }
 
     private fun deleteAllTask() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllTask()
+            taskRepository.deleteAllTask()
         }
     }
 
@@ -185,6 +209,10 @@ class TaskViewModel @Inject constructor(
             }
             Action.DELETE_ALL -> {
                 deleteAllTask()
+            }
+            Action.COMPLETED -> {
+
+                completedTask()
             }
             Action.UNDO -> {
                 addTask()

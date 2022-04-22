@@ -298,7 +298,7 @@ fun TaskItem(
                   checked = checked,
                   onCheckedChange ={
                       checked = true
-                      onCheckboxClicked(Action.DELETE,toDoTask)
+                      onCheckboxClicked(Action.COMPLETED,toDoTask)
                   },
                   colors = CheckboxDefaults.colors(Color.Transparent)
               )
