@@ -16,6 +16,7 @@ import com.example.goodhabitsapp.presentation.screens.todotask_screen.list_scree
 import com.example.goodhabitsapp.presentation.screens.todotask_screen.task_screen.TaskScreen
 import com.example.goodhabitsapp.util.Constants
 import com.example.goodhabitsapp.util.toAction
+import com.example.goodhabitsapp.view_models.StatsViewModel
 import com.example.goodhabitsapp.view_models.TaskViewModel
 import com.example.goodhabitsapp.view_models.TimerViewModel
 
@@ -26,7 +27,8 @@ import com.example.goodhabitsapp.view_models.TimerViewModel
 fun SetupNavigation(
     navController: NavHostController,
     taskViewModel: TaskViewModel,
-    timerViewModel: TimerViewModel
+    timerViewModel: TimerViewModel,
+    statsViewModel: StatsViewModel
 ) {
 
     NavHost(
@@ -49,7 +51,7 @@ fun SetupNavigation(
 
         //STATISTIC
         composable(route = Screen.Statistic.route) {
-            StatisticScreen(navController = navController)
+            StatisticScreen(navController = navController, statsViewModel = statsViewModel)
         }
 
 

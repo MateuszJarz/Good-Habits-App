@@ -8,7 +8,6 @@ import com.example.goodhabitsapp.data.repository.DataStoreRepository
 import com.example.goodhabitsapp.data.repository.StatRepository
 import com.example.goodhabitsapp.data.repository.TaskRepository
 import com.example.goodhabitsapp.domain.model.Priority
-import com.example.goodhabitsapp.domain.model.Statistics
 import com.example.goodhabitsapp.domain.model.Task
 import com.example.goodhabitsapp.util.Action
 import com.example.goodhabitsapp.util.Constants.MAX_TITLE_LENGTH
@@ -32,7 +31,6 @@ class TaskViewModel @Inject constructor(
     val title: MutableState<String> = mutableStateOf("")
     val description: MutableState<String> = mutableStateOf("")
     val priority: MutableState<Priority> = mutableStateOf(Priority.LOW)
-
 
 
     val searchAppBarState: MutableState<SearchAppBarState> =
@@ -166,12 +164,12 @@ class TaskViewModel @Inject constructor(
                 taskCompleted = 0,
                 taskNotCompleted = 0
             )
-          /*  val statistics = Statistics(
-                id = 1,
-                tasksCompleted = 1,
-                tasksNotCompleted = 0,
-            )*/
-            statRepository.updateStats()
+            /*  val statistics = Statistics(
+                  id = 1,
+                  tasksCompleted = 1,
+                  tasksNotCompleted = 0,
+              )*/
+            statRepository.tasksCompleted()
             taskRepository.deleteTask(toDoTask = toDoTask)
         }
     }
@@ -186,6 +184,7 @@ class TaskViewModel @Inject constructor(
                 taskCompleted = 0,
                 taskNotCompleted = 0
             )
+            statRepository.tasksNotCompleted()
             taskRepository.deleteTask(toDoTask = toDoTask)
         }
     }
@@ -211,8 +210,10 @@ class TaskViewModel @Inject constructor(
                 deleteAllTask()
             }
             Action.COMPLETED -> {
-
                 completedTask()
+            }
+            Action.NOT_COMPLETED -> {
+
             }
             Action.UNDO -> {
                 addTask()

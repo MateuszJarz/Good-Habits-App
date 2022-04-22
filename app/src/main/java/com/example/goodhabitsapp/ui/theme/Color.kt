@@ -18,6 +18,12 @@ val MediumPriorityColor = Color(0xFFFFC114)
 val HighPriorityColor = Color(0xFFFF4646)
 val NonePriorityColor = MediumGray
 
+val FabButtonColor = Color(0xFFFF6E45)
+val FabButtonColor2 = Color(0xFFFA0066)
+
+val ChartCompletedColor = Color(0xFF3700B3)
+val ChartNotCompletedColor = Color(0xFFBC0006)
+
 val Colors.splashScreenBackground: Color
     @Composable
     get() = if (isLight) Purple700 else Color.Black
@@ -32,7 +38,7 @@ val Colors.topAppBarBackgroundColor: Color
 
 val Colors.fabBackgroundColor: Color
     @Composable
-    get() = if (isLight) Teal200 else Purple700
+    get() = if (isLight) FabButtonColor else Purple700
 
 val Colors.taskItemBackgroundColor: Color
     @Composable

@@ -13,15 +13,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,7 +48,7 @@ fun ListContent(
     searchAppBarState: SearchAppBarState,
     navigateToDoTaskScreen: (taskId: Int) -> Unit,
     onSwipeToDelete: (Action, Task) -> Unit,
-    onCheckboxClicked: (Action,Task) -> Unit
+    onCheckboxClicked: (Action, Task) -> Unit
 
 ) {
     if (sortState is RequestState.Success) {
@@ -105,7 +106,7 @@ fun HandleListContent(
     tasks: List<Task>,
     onSwipeToDelete: (Action, Task) -> Unit,
     navigateToDoTaskScreen: (taskId: Int) -> Unit,
-    onCheckboxClicked: (Action,Task) -> Unit
+    onCheckboxClicked: (Action, Task) -> Unit
 ) {
     if (tasks.isEmpty()) {
         EmptyContent()
@@ -130,7 +131,7 @@ fun DisplayTasks(
     tasks: List<Task>,
     onSwipeToDelete: (Action, Task) -> Unit,
     navigateToDoTaskScreen: (taskId: Int) -> Unit,
-    onCheckboxClicked: (Action,Task) -> Unit
+    onCheckboxClicked: (Action, Task) -> Unit
 ) {
     LazyColumn {
         items(
@@ -200,7 +201,10 @@ fun RedBackground(degrees: Float) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = HighPriorityColor)
+            .background(
+                color = HighPriorityColor,
+                shape = RoundedCornerShape(topEnd = SMALL_PADDING, bottomEnd = SMALL_PADDING)
+            )
             .padding(horizontal = EXTRA_LARGE_PADDING),
         contentAlignment = Alignment.CenterEnd
     ) {
@@ -219,7 +223,7 @@ fun RedBackground(degrees: Float) {
 fun TaskItem(
     toDoTask: Task,
     navigateToDoTaskScreen: (taskId: Int) -> Unit,
-    onCheckboxClicked: (Action,Task) -> Unit
+    onCheckboxClicked: (Action, Task) -> Unit
 ) {
     var checked by remember {
         mutableStateOf(false)
@@ -228,84 +232,89 @@ fun TaskItem(
     Surface(modifier = Modifier
         .fillMaxWidth(),
         color = MaterialTheme.colors.taskItemBackgroundColor,
-        shape = RectangleShape,
+        shape = RoundedCornerShape(topEnd = SMALL_PADDING, bottomEnd = SMALL_PADDING),
         elevation = TASK_ITEM_ELEVATION,
         onClick = {
 
             navigateToDoTaskScreen(toDoTask.id)
         }
     ) {
-      
-      Row(modifier = Modifier
-          .fillMaxWidth()
-          .height(65.dp)
-      
-      ) {
-          
-          Column(
-              Modifier
-                  .fillMaxWidth(0.8f)
-                  .padding(all = LARGE_PADDING)
-                 // .fillMaxWidth()
-          ) {
 
-              Row {
-                  Text(
-                      modifier = Modifier.weight(8f),
-                      text = toDoTask.title,
-                      color = MaterialTheme.colors.taskItemTextColor,
-                      style = MaterialTheme.typography.h5,
-                      fontWeight = FontWeight.Bold,
-                      maxLines = 1
-                  )
-                  Box(
-                      modifier = Modifier
-                          .fillMaxWidth()
-                          .weight(1f),
-                      contentAlignment = Alignment.TopEnd
-                  ) {
-                      Canvas(
-                          modifier = Modifier
-                              .width(PRIORITY_INDICATOR_SIZE)
-                              .height(
-                                  PRIORITY_INDICATOR_SIZE
-                              )
-                      ) {
-                          drawCircle(
-                              color = toDoTask.priority.color
-                          )
-                      }
-                  }
-              }
-              Text(
-                  modifier = Modifier.fillMaxWidth(0.8f),
-                  color = MaterialTheme.colors.taskItemTextColor,
-                  text = toDoTask.description,
-                  style = MaterialTheme.typography.subtitle1,
-                  maxLines = 2,
-                  overflow = TextOverflow.Ellipsis
-              )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(65.dp)
+
+        ) {
+
+            Column(
+                Modifier
+                    .fillMaxWidth(0.8f)
+                    .padding(all = LARGE_PADDING)
+                // .fillMaxWidth()
+            ) {
+
+                Row {
+                    Text(
+                        modifier = Modifier.weight(8f),
+                        text = toDoTask.title,
+                        color = MaterialTheme.colors.taskItemTextColor,
+                        style = MaterialTheme.typography.h5,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1
+                    )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
+                        contentAlignment = Alignment.TopEnd
+                    ) {
+                        Canvas(
+                            modifier = Modifier
+                                .width(PRIORITY_INDICATOR_SIZE)
+                                .height(
+                                    PRIORITY_INDICATOR_SIZE
+                                )
+                        ) {
+                            drawCircle(
+                                color = toDoTask.priority.color
+                            )
+                        }
+                    }
+                }
+                Text(
+                    modifier = Modifier.fillMaxWidth(0.8f),
+                    color = MaterialTheme.colors.taskItemTextColor,
+                    text = toDoTask.description,
+                    style = MaterialTheme.typography.subtitle1,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
 
 
-          }
-          Box(modifier = Modifier
-              .fillMaxSize()
-              .background(Purple200.copy(ContentAlpha.medium))
-          ,) {
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Purple200.copy(ContentAlpha.medium))
 
-              Checkbox(
-                  modifier = Modifier.align(Alignment.Center),
-                  checked = checked,
-                  onCheckedChange ={
-                      checked = true
-                      onCheckboxClicked(Action.COMPLETED,toDoTask)
-                  },
-                  colors = CheckboxDefaults.colors(Color.Transparent)
-              )
-          }
-      }
-       
-        
+            ) {
+
+                Checkbox(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .clip(shape = RoundedCornerShape(SMALL_PADDING)),
+                    checked = checked,
+                    onCheckedChange = {
+                        checked = true
+                        onCheckboxClicked(Action.COMPLETED, toDoTask)
+                    },
+                    colors = CheckboxDefaults.colors(Color.Transparent)
+                )
+            }
+        }
+
+
     }
 }
 

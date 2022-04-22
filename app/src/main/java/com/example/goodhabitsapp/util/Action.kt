@@ -7,7 +7,8 @@ enum class Action {
     DELETE_ALL,
     UNDO,
     NO_ACTION,
-    COMPLETED
+    COMPLETED,
+    NOT_COMPLETED
 }
 
 fun String?.toAction(): Action {
@@ -29,6 +30,9 @@ fun String?.toAction(): Action {
         }
         this == "COMPLETED" -> {
             Action.COMPLETED
+        }
+        this == "NOT_COMPLETED" -> {
+            Action.NOT_COMPLETED
         }
         else -> {
             Action.NO_ACTION
