@@ -46,7 +46,8 @@ fun ListContent(
     sortState: RequestState<Priority>,
     searchAppBarState: SearchAppBarState,
     navigateToDoTaskScreen: (taskId: Int) -> Unit,
-    onSwipeToDelete: (Action, Task) -> Unit
+    onSwipeToDelete: (Action, Task) -> Unit,
+    onCheckboxClicked: (Action,Task) -> Unit
 
 ) {
     if (sortState is RequestState.Success) {
@@ -56,7 +57,8 @@ fun ListContent(
                     HandleListContent(
                         tasks = searchTasks.data,
                         onSwipeToDelete = onSwipeToDelete,
-                        navigateToDoTaskScreen = navigateToDoTaskScreen
+                        navigateToDoTaskScreen = navigateToDoTaskScreen,
+                        onCheckboxClicked = onCheckboxClicked
                     )
                 }
             }
@@ -66,7 +68,8 @@ fun ListContent(
                     HandleListContent(
                         tasks = allTasks.data,
                         onSwipeToDelete = onSwipeToDelete,
-                        navigateToDoTaskScreen = navigateToDoTaskScreen
+                        navigateToDoTaskScreen = navigateToDoTaskScreen,
+                        onCheckboxClicked = onCheckboxClicked
 
                     )
                 }
@@ -75,14 +78,16 @@ fun ListContent(
                 HandleListContent(
                     tasks = lowPriorityTask,
                     onSwipeToDelete = onSwipeToDelete,
-                    navigateToDoTaskScreen = navigateToDoTaskScreen
+                    navigateToDoTaskScreen = navigateToDoTaskScreen,
+                    onCheckboxClicked = onCheckboxClicked
                 )
             }
             sortState.data == Priority.HIGH -> {
                 HandleListContent(
                     tasks = highPriorityTask,
                     onSwipeToDelete = onSwipeToDelete,
-                    navigateToDoTaskScreen = navigateToDoTaskScreen
+                    navigateToDoTaskScreen = navigateToDoTaskScreen,
+                    onCheckboxClicked = onCheckboxClicked
 
                 )
             }
@@ -99,7 +104,8 @@ fun ListContent(
 fun HandleListContent(
     tasks: List<Task>,
     onSwipeToDelete: (Action, Task) -> Unit,
-    navigateToDoTaskScreen: (taskId: Int) -> Unit
+    navigateToDoTaskScreen: (taskId: Int) -> Unit,
+    onCheckboxClicked: (Action,Task) -> Unit
 ) {
     if (tasks.isEmpty()) {
         EmptyContent()
@@ -107,8 +113,8 @@ fun HandleListContent(
         DisplayTasks(
             tasks = tasks,
             onSwipeToDelete = onSwipeToDelete,
-            navigateToDoTaskScreen = navigateToDoTaskScreen
-
+            navigateToDoTaskScreen = navigateToDoTaskScreen,
+            onCheckboxClicked = onCheckboxClicked
 
         )
     }
@@ -124,6 +130,7 @@ fun DisplayTasks(
     tasks: List<Task>,
     onSwipeToDelete: (Action, Task) -> Unit,
     navigateToDoTaskScreen: (taskId: Int) -> Unit,
+    onCheckboxClicked: (Action,Task) -> Unit
 ) {
     LazyColumn {
         items(
@@ -175,7 +182,8 @@ fun DisplayTasks(
                     dismissContent = {
                         TaskItem(
                             toDoTask = task,
-                            navigateToDoTaskScreen = navigateToDoTaskScreen
+                            navigateToDoTaskScreen = navigateToDoTaskScreen,
+                            onCheckboxClicked = onCheckboxClicked
                         )
                     }
                 )
@@ -205,12 +213,18 @@ fun RedBackground(degrees: Float) {
     }
 }
 
+
 @ExperimentalMaterialApi
 @Composable
 fun TaskItem(
     toDoTask: Task,
-    navigateToDoTaskScreen: (taskId: Int) -> Unit
+    navigateToDoTaskScreen: (taskId: Int) -> Unit,
+    onCheckboxClicked: (Action,Task) -> Unit
 ) {
+    var checked by remember {
+        mutableStateOf(false)
+    }
+
     Surface(modifier = Modifier
         .fillMaxWidth(),
         color = MaterialTheme.colors.taskItemBackgroundColor,
@@ -222,7 +236,9 @@ fun TaskItem(
         }
     ) {
       
-      Row(modifier = Modifier.fillMaxWidth().height(65.dp)
+      Row(modifier = Modifier
+          .fillMaxWidth()
+          .height(65.dp)
       
       ) {
           
@@ -279,7 +295,12 @@ fun TaskItem(
 
               Checkbox(
                   modifier = Modifier.align(Alignment.Center),
-                  checked = false, onCheckedChange ={}
+                  checked = checked,
+                  onCheckedChange ={
+                      checked = true
+                      onCheckboxClicked(Action.DELETE,toDoTask)
+                  },
+                  colors = CheckboxDefaults.colors(Color.Transparent)
               )
           }
       }
@@ -302,7 +323,10 @@ fun TaskItemPrev() {
             taskCompleted = 0,
             taskNotCompleted = 0
         ),
-        navigateToDoTaskScreen = {})
+        navigateToDoTaskScreen = {},
+        onCheckboxClicked = { _, _ ->
+        }
+    )
 
 
 }

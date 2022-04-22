@@ -92,9 +92,16 @@ fun ListScreen(
                     navController.navigate(Screen.Task.passTaskId(taskId))
                 },
                 onSwipeToDelete = { action, task ->
+                    //TODO ADD POINTS -
                     taskViewModel.action.value = action
                     taskViewModel.updateTaskFields(selectedTask = task)
                 },
+                onCheckboxClicked = { action, task ->
+                    //TODO ADD POINTS +
+                    //TODO ADD ACTION COMPLITED
+                    taskViewModel.action.value = action
+                    taskViewModel.updateTaskFields(selectedTask = task)
+                }
             )
         },
         floatingActionButton = {
