@@ -1,7 +1,8 @@
 ## Good-Habits-App
 Todo application made with Jetpack Compose. The project allows you to add and manage tasks. Additional functionalities are a 25-minute timer and a view of the statistics of completed tasks.
 
-![Group 1](https://user-images.githubusercontent.com/62247805/166149374-12e9d899-9304-49dc-a1e5-28d5e8f40f23.jpg)
+![Group 1](https://user-images.githubusercontent.com/62247805/166156507-c5e90b87-87f4-4c6b-8126-8db05bb1aa81.png)
+
 
 Application based on:
 - Room Database
